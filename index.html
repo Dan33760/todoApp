@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main{
+            width: 80%;
+            height: auto;
+            background-color: antiquewhite;
+            margin: auto;
+            padding: 10px;
+            text-align: center;
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .complete{
+            text-decoration: line-through;
+        }
+        #btn{
+            text-decoration: none;
+        }
+
+    </style>
+
+    <script src="./jquery.min.js"></script>
+
+</head>
+<body> 
+
+    <div id="main">
+        <h1>ToDo List</h1>
+        <input type="text" id="inputEl">
+        <button id="btn" onclick="addItem()">Add</button>
+        <ul id="list"></ul>
+    </div>
+
+    
+    <script>
+
+        let inputEl = $('#inputEl')
+        let list = $('#list')
+
+        function addItem() {
+            let inputText = inputEl.val().trim()
+            let li = $("<li></li>")
+            let span = $("<span></span>")
+                span.text(inputText).appendTo(li)
+                span.on('click', completeTask)
+            
+            let button = $("<button></button>")
+                button.text("Delete")
+                button.on('click', deleteItem)
+                li.append(button)
+
+                list.append(li)
+            
+            inputEl.val('')
+
+            console.log(inputText)
+        }
+
+        
+        function deleteItem(e) {
+            let item = e.target.parentNode;
+            item.remove()
+        }
+
+        function completeTask(e) {
+            let item = e.target
+            item.classList.toggle('complete')
+        }
+
+
+
+    </script>
+
+    
+</body>
+</html>
